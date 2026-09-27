@@ -1,0 +1,686 @@
+/* Board Cards: colors and layout */
+
+:root {
+  --bg: #fbf7ef;
+  --ink: #1f2430;
+  --muted: #545a6a;
+  --panel: #ffffff;
+  --line: #e6dfd0;
+  --focus: #2563eb;
+  --shadow: 0 12px 28px rgba(31, 36, 48, 0.16);
+
+  /* The card face is always light, like paper. */
+  --paper: #fffdf7;
+  --paper-ink: #1f2430;
+  --chip: #f3eee2;
+  --chip-line: #e1d8c3;
+  --fwd: #15803d;
+  --bwd: #b91c1c;
+  --purple-bg: #e9d5ff;
+  --purple-ink: #581c87;
+
+  --gap: clamp(12px, 3vw, 24px);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16141d;
+    --ink: #f4f0e8;
+    --muted: #bdb7cc;
+    --panel: #221f2c;
+    --line: #3a3450;
+    --focus: #93b4ff;
+    --shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Lexend", "Verdana", system-ui, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+button {
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.emoji,
+.face-icon,
+.last-icon {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  letter-spacing: 0;
+}
+
+/* ---------- Page ---------- */
+
+.page {
+  max-width: 1040px;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding:
+    max(20px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(24px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.top {
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.1rem, 8vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.hint {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 1.15rem;
+}
+
+.error {
+  margin: 0 auto;
+  max-width: 32em;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: #fde8e8;
+  color: #7f1d1d;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* ---------- Decks (the letters A to E) ---------- */
+
+.decks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap);
+  padding: 0 10px 10px 0; /* room for the card stack */
+}
+
+.deck {
+  --deck: #555;
+  --deck-ink: #fff;
+  --deck-dark: #333;
+  flex: 0 0 auto;
+  width: min(150px, calc((100% - 2 * var(--gap)) / 3));
+  aspect-ratio: 5 / 7;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  color: var(--deck-ink);
+  background:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0 8px, transparent 8px 16px),
+    var(--deck);
+  box-shadow:
+    inset 0 0 0 5px rgba(255, 255, 255, 0.92),
+    4px 4px 0 0 var(--paper),
+    6px 6px 0 0 var(--deck-dark),
+    10px 10px 0 0 var(--paper),
+    12px 12px 0 0 var(--deck-dark),
+    0 16px 26px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.deck:hover {
+  transform: translateY(-4px) rotate(-1.5deg);
+}
+
+.deck:active {
+  transform: scale(0.96);
+}
+
+.deck-letter {
+  display: grid;
+  place-items: center;
+  width: 1.45em;
+  height: 1.45em;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 2.4rem;
+  font-size: 36cqi;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.deck-name {
+  max-width: 90%;
+  padding: 0.15em 0.7em;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 0.95rem;
+  font-size: max(14px, 12cqi);
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 640px) {
+  .deck {
+    width: min(180px, calc((100% - 4 * var(--gap)) / 5));
+  }
+}
+
+/* ---------- Last card ---------- */
+
+.last {
+  text-align: center;
+}
+
+.last h2 {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.last-card {
+  --deck: #555;
+  --deck-ink: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 10px 16px 10px 10px;
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.last-letter,
+.key-letter {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--deck);
+  color: var(--deck-ink);
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.last-icon {
+  flex: none;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.last-text {
+  flex: 1;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* ---------- Bottom buttons ---------- */
+
+.bottom {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--ink);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toggle input {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: #7e22ce;
+}
+
+.toggle:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+[hidden],
+dialog:not([open]) {
+  display: none !important;
+}
+
+/* ---------- The card ---------- */
+
+.card-dialog {
+  --deck: #555;
+  --deck-ink: #fff;
+  --deck-dark: #333;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-width: 100vw;
+  max-height: 100vh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(18, 14, 28, 0.92);
+  color: var(--ink);
+  overflow: auto;
+}
+
+.card-dialog[open] {
+  display: flex;
+}
+
+.card-dialog::backdrop {
+  background: transparent;
+}
+
+.card-stage {
+  margin: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.flip {
+  position: relative;
+  width: min(86vw, 400px);
+  width: min(86vw, 400px, calc((100svh - 130px) * 5 / 7));
+  aspect-ratio: 5 / 7;
+  transform: perspective(1400px) rotateY(180deg);
+  transform-style: preserve-3d;
+}
+
+.flip.animate {
+  animation: reveal 0.9s cubic-bezier(0.3, 0.7, 0.3, 1) both;
+}
+
+@keyframes reveal {
+  0% {
+    transform: perspective(1400px) rotateY(0deg) scale(0.8);
+  }
+  30% {
+    transform: perspective(1400px) rotateY(0deg) scale(1);
+  }
+  100% {
+    transform: perspective(1400px) rotateY(180deg) scale(1);
+  }
+}
+
+.side {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+}
+
+.side-back {
+  display: grid;
+  place-items: center;
+  transform: rotateY(0deg);
+  container-type: inline-size;
+  color: var(--deck-ink);
+  background:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0 12px, transparent 12px 24px),
+    var(--deck);
+  box-shadow:
+    inset 0 0 0 8px rgba(255, 255, 255, 0.92),
+    0 24px 48px rgba(0, 0, 0, 0.4);
+}
+
+.back-letter {
+  display: grid;
+  place-items: center;
+  width: 1.45em;
+  height: 1.45em;
+  border: 5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 7rem;
+  font-size: 36cqi;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.side-face {
+  display: flex;
+  flex-direction: column;
+  transform: rotateY(180deg);
+  container-type: size;
+  background: var(--paper);
+  color: var(--paper-ink);
+}
+
+.face-top {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 12px 16px;
+  padding: 3.5cqi 5cqi;
+  background: var(--deck);
+  color: var(--deck-ink);
+  font-size: 1.2rem;
+  font-size: max(15px, 6cqi);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.face-letter {
+  display: grid;
+  place-items: center;
+  width: 1.7em;
+  height: 1.7em;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.face-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 22px 22px;
+  padding: 5cqi 7cqi 7cqi;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.face-inner {
+  margin: auto 0; /* center, but still scroll if the text is too long */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  gap: 4cqi;
+}
+
+.who {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.who span {
+  padding: 0.2em 0.7em;
+  border: 2px solid var(--chip-line);
+  border-radius: 999px;
+  background: var(--chip);
+  font-size: 0.95rem;
+  font-size: max(14px, 4.8cqi);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.face-icon {
+  font-size: 4.5rem;
+  font-size: 21cqi;
+  line-height: 1.1;
+}
+
+.face-text {
+  margin: 0;
+  font-size: 1.6rem;
+  font-size: 8.4cqi;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.face-text.is-medium {
+  font-size: 1.4rem;
+  font-size: 7.4cqi;
+}
+
+.face-text.is-long {
+  font-size: 1.2rem;
+  font-size: 6.4cqi;
+}
+
+.face-text .line {
+  display: block;
+}
+
+.face-text .line + .line {
+  margin-top: 0.3em;
+}
+
+.go-forward {
+  color: var(--fwd);
+  font-weight: 800;
+}
+
+.go-back {
+  color: var(--bwd);
+  font-weight: 800;
+}
+
+.purple {
+  padding: 0 0.2em;
+  border-radius: 0.3em;
+  background: var(--purple-bg);
+  color: var(--purple-ink);
+  font-weight: 800;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 24px;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
+  background: #2d2640;
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-main {
+  min-width: 150px;
+  border-color: #fff;
+  background: #fff;
+  color: #1f2430;
+}
+
+.card-dialog :focus-visible {
+  outline-color: #93b4ff;
+}
+
+/* Short screens, for example a phone on its side */
+@media (orientation: landscape) and (max-height: 540px) {
+  .card-stage {
+    flex-direction: row;
+  }
+
+  .flip {
+    width: min(60vw, calc((100vh - 32px) * 5 / 7));
+    width: min(60vw, calc((100svh - 32px) * 5 / 7));
+  }
+
+  .card-actions {
+    flex-direction: column;
+  }
+}
+
+/* ---------- How to play ---------- */
+
+.rules-dialog {
+  width: min(640px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px);
+  max-height: calc(100dvh - 24px);
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  background: var(--panel);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.rules-dialog::backdrop {
+  background: rgba(18, 14, 28, 0.6);
+}
+
+.rules-head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px 14px 22px;
+  border-bottom: 2px solid var(--line);
+  background: var(--panel);
+}
+
+.rules-head h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.rules-body {
+  padding: 8px 22px 26px;
+}
+
+.rules-body h3 {
+  margin: 26px 0 8px;
+  font-size: 1.2rem;
+}
+
+.rules-body p {
+  margin: 0 0 8px;
+}
+
+.rules-body ul,
+.rules-body ol {
+  margin: 0;
+  padding-left: 1.4em;
+}
+
+.rules-body li {
+  margin: 8px 0;
+}
+
+.steps {
+  margin-top: 12px !important;
+}
+
+.key-list {
+  padding: 0 !important;
+  list-style: none;
+}
+
+.key-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ---------- Old browsers ---------- */
+
+@supports not (aspect-ratio: 1 / 1) {
+  .deck {
+    height: 39vw;
+    max-height: 210px;
+  }
+
+  .flip {
+    height: 120vw;
+    max-height: 560px;
+  }
+}
+
+/* ---------- Less motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .flip.animate {
+    animation: none;
+  }
+
+  .deck,
+  .deck:hover,
+  .deck:active {
+    transition: none;
+    transform: none;
+  }
+}
