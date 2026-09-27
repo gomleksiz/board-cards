@@ -77,7 +77,7 @@ button {
 /* ---------- Page ---------- */
 
 .page {
-  max-width: 1040px;
+  max-width: 1200px;
   min-height: 100vh;
   min-height: 100svh;
   margin: 0 auto;
@@ -119,9 +119,10 @@ h1 {
   text-align: center;
 }
 
-/* ---------- Decks (the letters A to E) ---------- */
+/* ---------- Decks (the letters A to E, and P) ---------- */
 
 .decks {
+  --count: 5; /* app.js sets the real number of decks */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -195,9 +196,25 @@ h1 {
   overflow-wrap: anywhere;
 }
 
+/* Tablets: 3 decks in a row, but bigger */
 @media (min-width: 640px) {
   .deck {
-    width: min(180px, calc((100% - 4 * var(--gap)) / 5));
+    width: min(180px, calc((100% - 2 * var(--gap)) / 3));
+  }
+}
+
+/* Computers, and phones on their side: all decks in 1 row */
+@media (min-width: 960px), (min-width: 560px) and (orientation: landscape) and (max-height: 540px) {
+  .deck {
+    width: min(180px, calc((100% - (var(--count) - 1) * var(--gap)) / var(--count)));
+  }
+}
+
+/* Small decks (small phones, phones on their side): smaller names */
+@container (max-width: 100px) {
+  .deck-name {
+    padding: 0.15em 0.45em;
+    font-size: 12px;
   }
 }
 

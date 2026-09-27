@@ -7,7 +7,8 @@ Tap a letter. You get a random card.
 
 1. Roll the dice. Move your piece.
 2. If you stop on a flap, lift the flap. Look at the letter.
-3. Open the web page. Tap the same letter.
+   Open the web page. Tap the same letter.
+3. If you stop on a purple space, tap P.
 4. Do what the card tells you.
 
 ## The letters
@@ -19,13 +20,17 @@ Tap a letter. You get a random card.
 | C      | Change   | Swap and pick  |
 | D      | Dice     | Roll the dice  |
 | E      | Everyone | All players    |
+| P      | Purple   | For purple spaces. Most cards help you. |
 
 Each letter has 12 cards.
 The page shows all 12 cards of a letter before a card comes back.
 
 ## Purple spaces
 
-Purple spaces are magic spaces. Many cards use them.
+Purple spaces are magic spaces.
+If you stop on a purple space, take a purple card (P).
+Most purple cards help you. Some cards are a small surprise.
+Many other cards also use purple spaces.
 
 - **Next purple space** = the first purple space in front of you.
 - **Purple space behind you** = the first purple space behind you.
@@ -33,7 +38,7 @@ Purple spaces are magic spaces. Many cards use them.
 ## Good to know
 
 - You cannot move back past space 1.
-- If a card moves you to a letter space, do not take a new card.
+- If a card moves you to a letter space or a purple space, do not take a new card.
 - If you cannot do what the card says, stay where you are.
 
 ## Page features
@@ -41,7 +46,7 @@ Purple spaces are magic spaces. Many cards use them.
 - **Read**: the page reads the card out loud.
 - **Read cards out loud**: turn this on. The page reads every new card.
 - **Last card**: tap it to see the last card again.
-- **Keys A to E**: on a computer, press a letter key to take a card.
+- **Keys A to E and P**: on a computer, press a letter key to take a card.
 
 ## Put the page on GitHub Pages
 

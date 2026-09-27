@@ -6,6 +6,7 @@
 
   Each deck has:
     letter  The letter under the flap on the board.
+            (P is for the purple spaces.)
     name    A short name for the deck.
     about   What the cards in the deck do. It shows in "How to play".
     color   The color of the deck.
@@ -128,6 +129,28 @@ window.DECKS = [
       { icon: "🏃", who: "others", text: "Everyone else moves forward 2 spaces.\nYou stay here." },
       { icon: "🔔", who: "others", text: "Everyone behind you moves forward 2 spaces." },
       { icon: "🙃", who: "all", text: "Everyone else moves back 1 space.\nYou move forward 1 space." },
+    ],
+  },
+  {
+    // Take a card from this deck when you stop on a purple space.
+    // Purple is magic: most of these cards help you.
+    letter: "P",
+    name: "Purple",
+    about: "For purple spaces",
+    color: "#7e22ce",
+    cards: [
+      { icon: "✨", who: "you", text: "Magic!\nMove forward 3 spaces." },
+      { icon: "🦋", who: "you", text: "Butterfly wings!\nMove forward 5 spaces." },
+      { icon: "💜", who: "you", text: "Move to the next purple space." },
+      { icon: "🎲", who: "you", text: "Roll the dice again and move." },
+      { icon: "🔮", who: "you", text: "Roll the dice.\nMove forward that many spaces." },
+      { icon: "🌟", who: "you", text: "Move forward 2 spaces.\nThen roll the dice again and move." },
+      { icon: "🎩", who: "pick", text: "Pick another player.\nThey move back 2 spaces." },
+      { icon: "🔄", who: "pick", text: "Pick another player.\nSwap spaces with them." },
+      { icon: "🍭", who: "all", text: "Everyone else moves forward 1 space.\nYou move forward 3 spaces." },
+      { icon: "💜", who: "all", text: "Players on a purple space move forward 2 spaces." },
+      { icon: "😴", who: "you", text: "Magic sleep!\nMiss your next turn." },
+      { icon: "🌀", who: "you", text: "Oops, magic wind!\nMove back 2 spaces." },
     ],
   },
 ];

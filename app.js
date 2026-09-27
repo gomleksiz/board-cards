@@ -78,6 +78,7 @@
     applyDeckColors(item, deck);
     keyList.appendChild(item);
   });
+  deckBox.style.setProperty("--count", String(decks.length));
 
   // ---------- Draw a card ----------
 
@@ -336,7 +337,7 @@
     if (event.target === rulesDialog) closeDialog(rulesDialog);
   });
 
-  // Keys A to E take a card from that deck.
+  // Letter keys (A to E, and P) take a card from that deck.
   document.addEventListener("keydown", (event) => {
     if (event.ctrlKey || event.metaKey || event.altKey || event.repeat) return;
     if (cardDialog.open || rulesDialog.open) return;
